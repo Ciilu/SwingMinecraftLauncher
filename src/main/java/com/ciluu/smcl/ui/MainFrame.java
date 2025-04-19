@@ -2,14 +2,11 @@ package com.ciluu.smcl.ui;
 
 
 import com.ciluu.smcl.Main;
-import com.ciluu.smcl.utils.SmclLogger;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URL;
 import java.util.Objects;
 
 public class MainFrame extends JFrame {

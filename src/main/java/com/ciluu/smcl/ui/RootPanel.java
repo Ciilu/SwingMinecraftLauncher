@@ -11,16 +11,16 @@ import java.util.Collection;
 
 public class RootPanel extends JPanel {
     private final DefaultGameRepository defaultGameRepository;
-    private final JScrollPane scrollPane = new JScrollPane();
+    private final JScrollPane listPane = new JScrollPane();
+    private final DefaultListModel<Version> listModel = new DefaultListModel<>();
+    private final JList<Version> listBox = new JList<>(listModel);
 
     public RootPanel(File path) {
-        super(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        this.setLayout(new BorderLayout());
         this.defaultGameRepository = new DefaultGameRepository(path);
-        loadVersions();
-    }
-
-    public DefaultGameRepository getDefaultGameRepository() {
-        return defaultGameRepository;
+        this.loadVersions();
+        this.add(listPane, BorderLayout.WEST);
+        this.listPane.setPreferredSize(new Dimension(400 / 2, this.getHeight()));
     }
 
     private void loadVersions() {
@@ -36,5 +36,10 @@ public class RootPanel extends JPanel {
             versionList.append("- ").append(version.getId()).append("\n");
         });
         SmclLogger.LOGGER.info(String.format("找到 %d 个版本 列表：%s", versions.size(), versionList));
+        defaultGameRepository.getVersions().forEach(listModel::addElement);
+        listBox.setModel(listModel);
+        listBox.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.listPane.add(listBox);
+        this.listPane.setViewportView(listBox);
     }
 }
