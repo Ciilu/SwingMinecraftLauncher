@@ -3,7 +3,6 @@ package com.ciluu.smcl.ui;
 
 import com.ciluu.smcl.Main;
 import com.ciluu.smcl.Settings;
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +26,12 @@ public class MainFrame extends JFrame {
     private void initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
+        menuBar.add(getEditMenu());
+        menuBar.add(getHelpMenu());
+
+        this.setJMenuBar(menuBar);
+    }
+    private JMenu getEditMenu() {
         JMenu editMenu = new JMenu("操作");
         JMenuItem refreshItem = new JMenuItem("刷新");
         JMenuItem setGameDirItem = new JMenuItem("修改游戏仓库");
@@ -41,16 +46,9 @@ public class MainFrame extends JFrame {
             Settings.setGameDir(fileChooser.getSelectedFile().getAbsolutePath());
             panel.refreshVersions();
         });
-
-        JMenu helpMenu = getHelpMenu();
-
-        menuBar.add(editMenu);
-        menuBar.add(helpMenu);
-
-        this.setJMenuBar(menuBar);
+        return editMenu;
     }
-
-    private static JMenu getHelpMenu() {
+    private JMenu getHelpMenu() {
         JMenu helpMenu = new JMenu("帮助");
         JMenuItem aboutMenuItem = new JMenuItem("关于");
         JMenuItem githubMenuItem = new JMenuItem("Github");
