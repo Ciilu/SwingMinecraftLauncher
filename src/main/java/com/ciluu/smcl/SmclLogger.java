@@ -1,4 +1,4 @@
-package com.ciluu.smcl.utils;
+package com.ciluu.smcl;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

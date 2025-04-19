@@ -1,7 +1,6 @@
 package com.ciluu.smcl;
 
 import com.ciluu.smcl.ui.MainFrame;
-import com.ciluu.smcl.utils.SmclLogger;
 import com.formdev.flatlaf.FlatLightLaf;
 import org.jackhuang.hmcl.util.SelfDependencyPatcher;
 

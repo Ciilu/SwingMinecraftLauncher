@@ -24,6 +24,10 @@ public class Settings {
             SETTING.set("gameDir", new File(".minecraft").getAbsolutePath());
         }
 
+        if (SETTING.get("playerName") == null) {
+            SETTING.set("playerName", "Player");
+        }
+
         SETTING.store();
     }
 
@@ -36,6 +40,15 @@ public class Settings {
 
     public static void setGameDir(String gameDir) {
         SETTING.set("gameDir", gameDir);
+        SETTING.store();
+    }
+
+    public static String getPlayerName() {
+        return SETTING.get("playerName");
+    }
+
+    public static void setPlayerName(String name) {
+        SETTING.set("playerName", name);
         SETTING.store();
     }
 }

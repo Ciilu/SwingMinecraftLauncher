@@ -26,18 +26,18 @@ public class MainFrame extends JFrame {
     private void initMenuBar() {
         JMenuBar menuBar = new JMenuBar();
 
+
         menuBar.add(getEditMenu());
         menuBar.add(getHelpMenu());
+        menuBar.add(getSettingMenu());
 
         this.setJMenuBar(menuBar);
     }
-    private JMenu getEditMenu() {
-        JMenu editMenu = new JMenu("操作");
-        JMenuItem refreshItem = new JMenuItem("刷新");
+
+    private JMenu getSettingMenu() {
+        JMenu editMenu = new JMenu("设置");
         JMenuItem setGameDirItem = new JMenuItem("修改游戏仓库");
-        editMenu.add(refreshItem);
-        editMenu.add(setGameDirItem);
-        refreshItem.addActionListener(e -> panel.refreshVersions());
+        JMenuItem setPlayerNameItem = new JMenuItem("修改用户名");
 
         setGameDirItem.addActionListener(e -> {
             JFileChooser fileChooser = new JFileChooser();
@@ -46,8 +46,25 @@ public class MainFrame extends JFrame {
             Settings.setGameDir(fileChooser.getSelectedFile().getAbsolutePath());
             panel.refreshVersions();
         });
+
+        setPlayerNameItem.addActionListener(e -> {
+            String userName = JOptionPane.showInputDialog("请输入用户名", Settings.getPlayerName());
+            Settings.setPlayerName(userName);
+        });
+        editMenu.add(setGameDirItem);
+        editMenu.add(setPlayerNameItem);
+
         return editMenu;
     }
+
+    private JMenu getEditMenu() {
+        JMenu editMenu = new JMenu("操作");
+        JMenuItem refreshItem = new JMenuItem("刷新");
+        refreshItem.addActionListener(e -> panel.refreshVersions());
+        editMenu.add(refreshItem);
+        return editMenu;
+    }
+
     private JMenu getHelpMenu() {
         JMenu helpMenu = new JMenu("帮助");
         JMenuItem aboutMenuItem = new JMenuItem("关于");
