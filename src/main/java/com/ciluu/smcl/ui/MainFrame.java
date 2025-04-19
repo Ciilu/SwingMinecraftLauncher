@@ -3,10 +3,10 @@ package com.ciluu.smcl.ui;
 
 import com.ciluu.smcl.Main;
 import com.ciluu.smcl.Settings;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.net.URI;
 import java.util.Objects;
 
@@ -42,6 +42,15 @@ public class MainFrame extends JFrame {
             panel.refreshVersions();
         });
 
+        JMenu helpMenu = getHelpMenu();
+
+        menuBar.add(editMenu);
+        menuBar.add(helpMenu);
+
+        this.setJMenuBar(menuBar);
+    }
+
+    private static JMenu getHelpMenu() {
         JMenu helpMenu = new JMenu("帮助");
         JMenuItem aboutMenuItem = new JMenuItem("关于");
         JMenuItem githubMenuItem = new JMenuItem("Github");
@@ -61,10 +70,6 @@ public class MainFrame extends JFrame {
 
         helpMenu.add(githubMenuItem);
         helpMenu.add(aboutMenuItem);
-
-        menuBar.add(editMenu);
-        menuBar.add(helpMenu);
-
-        this.setJMenuBar(menuBar);
+        return helpMenu;
     }
 }
