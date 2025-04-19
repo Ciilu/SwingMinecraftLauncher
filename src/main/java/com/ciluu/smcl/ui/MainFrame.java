@@ -1,13 +1,21 @@
 package com.ciluu.smcl.ui;
 
+
+import com.ciluu.smcl.Main;
+import com.ciluu.smcl.utils.SmclLogger;
+
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.util.Objects;
 
 public class MainFrame extends JFrame {
     public MainFrame() {
         setIconImage(new ImageIcon(Objects.requireNonNull(MainFrame.class.getResource("/icon.png"))).getImage());
-        setTitle("Swing Minecraft Launcher");
+        setTitle("Swing Minecraft Launcher "+ Main.LAUNCHER_VERSION);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -25,14 +33,22 @@ public class MainFrame extends JFrame {
 
         JMenu helpMenu = new JMenu("帮助");
         JMenuItem aboutMenuItem = new JMenuItem("关于");
+        JMenuItem githubMenuItem = new JMenuItem("Github");
         aboutMenuItem.addActionListener(e -> {
-            // 显示关于对话框
             JOptionPane.showMessageDialog(null,
                     "一个基于 HMCLCore 开发的 Minecraft 启动器。\nUI库：Flatlaf",
                     "关于",
                     JOptionPane.INFORMATION_MESSAGE);
         });
+        githubMenuItem.addActionListener(e -> {
+            try {
+                Desktop.getDesktop().browse(new URI("https://github.com/Ciilu/SMCL"));
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
+        helpMenu.add(githubMenuItem);
         helpMenu.add(aboutMenuItem);
 
         menuBar.add(editMenu);
