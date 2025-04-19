@@ -28,8 +28,8 @@ tasks.test {
 
 tasks.getByName<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
     minimize {
-
-    }
+        exclude("/assets/")
+   }
 
     manifest {
         attributes(
