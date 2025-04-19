@@ -2,6 +2,7 @@ package com.ciluu.smcl.ui;
 
 
 import com.ciluu.smcl.Main;
+import com.ciluu.smcl.Settings;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.net.URI;
 import java.util.Objects;
 
 public class MainFrame extends JFrame {
-    private final RootPanel panel = new RootPanel(new File("C:\\Users\\admin\\AppData\\Roaming\\.minecraft"));
+    private final RootPanel panel;
 
     public MainFrame() {
         setIconImage(new ImageIcon(Objects.requireNonNull(MainFrame.class.getResource("/icon.png"))).getImage());
@@ -18,7 +19,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
-
+        panel = new RootPanel();
         initMenuBar();
         setContentPane(panel);
     }
@@ -28,8 +29,16 @@ public class MainFrame extends JFrame {
 
         JMenu editMenu = new JMenu("操作");
         JMenuItem refreshItem = new JMenuItem("刷新");
+        JMenuItem setGameDirItem = new JMenuItem("修改游戏仓库");
         editMenu.add(refreshItem);
-        refreshItem.addActionListener(e -> {
+        editMenu.add(setGameDirItem);
+        refreshItem.addActionListener(e -> panel.refreshVersions());
+
+        setGameDirItem.addActionListener(e -> {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            fileChooser.showOpenDialog(this);
+            Settings.setGameDir(fileChooser.getSelectedFile().getAbsolutePath());
             panel.refreshVersions();
         });
 
@@ -38,7 +47,7 @@ public class MainFrame extends JFrame {
         JMenuItem githubMenuItem = new JMenuItem("Github");
         aboutMenuItem.addActionListener(e -> {
             JOptionPane.showMessageDialog(null,
-                    "一个基于 HMCLCore 开发的 Minecraft 启动器。\nUI库：Flatlaf",
+                    "一个基于 HMCL 底层开发的 Minecraft 启动器。\nUI库：Flatlaf",
                     "关于",
                     JOptionPane.INFORMATION_MESSAGE);
         });

@@ -16,6 +16,7 @@ dependencies {
     implementation("com.formdev:flatlaf-intellij-themes:+")
     implementation("com.formdev:flatlaf-extras:+")
     implementation("org.glavo.hmcl:hmcl-dev:+")
+    implementation("cn.hutool:hutool-setting:+")
 
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")

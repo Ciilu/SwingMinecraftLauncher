@@ -1,5 +1,6 @@
 package com.ciluu.smcl.ui;
 
+import com.ciluu.smcl.Settings;
 import com.ciluu.smcl.utils.OfflineLaunch;
 import com.ciluu.smcl.utils.SmclLogger;
 import org.jackhuang.hmcl.game.DefaultGameRepository;
@@ -11,14 +12,13 @@ import java.io.File;
 import java.util.Collection;
 
 public class RootPanel extends JPanel {
-    private final DefaultGameRepository repository;
+    private DefaultGameRepository repository;
     private final DefaultListModel<Version> listModel = new DefaultListModel<>();
     private final JList<Version> listBox = new JList<>(listModel);
     private final GamePane gamePane = new GamePane();
 
-    public RootPanel(File path) {
+    public RootPanel() {
         setLayout(new BorderLayout());
-        repository = new DefaultGameRepository(path);
         loadVersions();
 
         JScrollPane scrollPane = new JScrollPane(listBox);
@@ -38,6 +38,7 @@ public class RootPanel extends JPanel {
     }
 
     private void loadVersions() {
+        repository = new DefaultGameRepository(new File(Settings.getGameDir()));
         SmclLogger.LOGGER.info("加载版本... 游戏仓库：" + repository.getBaseDirectory());
         repository.refreshVersions();
         Collection<Version> versions = repository.getVersions();
