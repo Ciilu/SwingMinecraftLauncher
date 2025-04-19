@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("org.openjfx.javafxplugin") version "0.1.0"
 }
 
 group = "com.ciluu.smcl"
@@ -68,4 +69,10 @@ tasks.withType<JavaExec> {
         "--add-opens", "java.base/java.lang.reflect=ALL-UNNAMED",
         "--add-opens", "java.base/jdk.internal.loader=ALL-UNNAMED"
     )
+}
+
+javafx {
+    configuration = "compileOnly"
+    version = "17"
+    modules("javafx.controls", "javafx.media")
 }
