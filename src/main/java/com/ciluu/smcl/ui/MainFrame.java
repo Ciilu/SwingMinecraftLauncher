@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.Objects;
 
 public class MainFrame extends JFrame {
-    private final JPanel panel = new RootPanel(new File("C:\\Users\\admin\\AppData\\Roaming\\.minecraft"));
+    private final RootPanel panel = new RootPanel(new File("C:\\Users\\admin\\AppData\\Roaming\\.minecraft"));
 
     public MainFrame() {
         setIconImage(new ImageIcon(Objects.requireNonNull(MainFrame.class.getResource("/icon.png"))).getImage());
@@ -27,6 +27,11 @@ public class MainFrame extends JFrame {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu editMenu = new JMenu("操作");
+        JMenuItem refreshItem = new JMenuItem("刷新");
+        editMenu.add(refreshItem);
+        refreshItem.addActionListener(e -> {
+            panel.refreshVersions();
+        });
 
         JMenu helpMenu = new JMenu("帮助");
         JMenuItem aboutMenuItem = new JMenuItem("关于");
