@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "com.ciluu.smcl"
-version = "1.0.0"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
@@ -28,7 +28,14 @@ tasks.test {
 
 tasks.getByName<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
     minimize {
-        exclude("/assets/")
+        exclude("/assets/about/**")
+        exclude("/assets/css/**")
+        exclude("/assets/game/**")
+        exclude("/assets/img/**")
+        exclude("/assets/lang/**")
+        exclude("/assets/hmcl*")
+        exclude("/assets/HMCL*")
+        exclude("/assets/mod*")
    }
 
     manifest {
