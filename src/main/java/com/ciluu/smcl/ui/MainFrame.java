@@ -42,7 +42,7 @@ public class MainFrame extends JFrame {
         });
         githubMenuItem.addActionListener(e -> {
             try {
-                Desktop.getDesktop().browse(new URI("https://github.com/Ciilu/SMCL"));
+                Desktop.getDesktop().browse(new URI("https://github.com/Ciilu/SwingMinecraftLauncher"));
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
