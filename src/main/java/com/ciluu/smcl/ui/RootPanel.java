@@ -93,7 +93,8 @@ public class RootPanel extends JPanel {
         public void update(Version version) {
             removeAll();
             add(new JLabel(version.getId()));
-            JButton launchButton = new JButton("开始游戏");
+            JButton launchButton = new JButton("启动游戏");
+            JButton removeButton = new JButton("删除该版本");
             launchButton.addActionListener((e) -> {
                 String userName = Settings.getPlayerName();
                 OfflineAccount account = new OfflineAccountFactory(getAuthlibInjectorArtifactProvider())
@@ -102,7 +103,13 @@ public class RootPanel extends JPanel {
                     LaunchHelper.launch(repository, version, account, this);
                 }).start();
             });
+            removeButton.addActionListener((e) -> {
+                if (JOptionPane.showConfirmDialog(this, "你确定要删除此版本吗？此操作不可撤销！", "警告", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    repository.removeVersionFromDisk(version.getId());
+                }
+            });
             add(launchButton);
+            add(removeButton);
             revalidate();
             repaint();
         }

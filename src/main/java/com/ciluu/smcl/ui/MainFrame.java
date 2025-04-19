@@ -3,6 +3,7 @@ package com.ciluu.smcl.ui;
 
 import com.ciluu.smcl.Main;
 import com.ciluu.smcl.Settings;
+import org.jackhuang.hmcl.Launcher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,8 +29,8 @@ public class MainFrame extends JFrame {
 
 
         menuBar.add(getEditMenu());
-        menuBar.add(getHelpMenu());
         menuBar.add(getSettingMenu());
+        menuBar.add(getHelpMenu());
 
         this.setJMenuBar(menuBar);
     }
@@ -59,8 +60,11 @@ public class MainFrame extends JFrame {
 
     private JMenu getEditMenu() {
         JMenu editMenu = new JMenu("操作");
+        JMenuItem installItem = new JMenuItem("安装新版本");
         JMenuItem refreshItem = new JMenuItem("刷新");
+        installItem.addActionListener(e -> panel.refreshVersions());
         refreshItem.addActionListener(e -> panel.refreshVersions());
+        editMenu.add(installItem);
         editMenu.add(refreshItem);
         return editMenu;
     }
