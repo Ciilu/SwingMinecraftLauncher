@@ -106,6 +106,7 @@ public class RootPanel extends JPanel {
             removeButton.addActionListener((e) -> {
                 if (JOptionPane.showConfirmDialog(this, "你确定要删除此版本吗？此操作不可撤销！", "警告", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     repository.removeVersionFromDisk(version.getId());
+                    refreshVersions();
                 }
             });
             add(launchButton);

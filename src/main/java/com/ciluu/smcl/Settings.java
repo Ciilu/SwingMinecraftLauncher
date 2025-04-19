@@ -28,6 +28,11 @@ public class Settings {
             SETTING.set("playerName", "Player");
         }
 
+        if (SETTING.get("downloadThreads") == null) {
+            SETTING.set("downloadThreads", "16");
+        }
+
+
         SETTING.store();
     }
 
@@ -49,6 +54,15 @@ public class Settings {
 
     public static void setPlayerName(String name) {
         SETTING.set("playerName", name);
+        SETTING.store();
+    }
+
+    public static String getDownloadThreads() {
+        return SETTING.get("downloadThreads");
+    }
+
+    public static void setDownloadThreads(String name) {
+        SETTING.set("downloadThreads", name);
         SETTING.store();
     }
 }

@@ -36,7 +36,7 @@ tasks.getByName<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("sha
         exclude("/assets/hmcl*")
         exclude("/assets/HMCL*")
         exclude("/assets/mod*")
-   }
+    }
 
     manifest {
         attributes(

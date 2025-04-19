@@ -39,7 +39,6 @@ public class LaunchHelper {
     }
 
     private static void initializeJavaManager() throws Exception {
-        CacheRepository.setInstance(HMCLCacheRepository.REPOSITORY);
         Class<JavaManager> javaManagerClass = JavaManager.class;
         Method method = javaManagerClass.getDeclaredMethod("searchPotentialJavaExecutables");
         method.setAccessible(true);
