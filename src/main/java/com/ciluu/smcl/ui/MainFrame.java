@@ -10,6 +10,8 @@ import java.net.URI;
 import java.util.Objects;
 
 public class MainFrame extends JFrame {
+    private final JPanel panel = new RootPanel(new File("C:\\Users\\admin\\AppData\\Roaming\\.minecraft"));
+
     public MainFrame() {
         setIconImage(new ImageIcon(Objects.requireNonNull(MainFrame.class.getResource("/icon.png"))).getImage());
         setTitle("Swing Minecraft Launcher " + Main.LAUNCHER_VERSION);
@@ -18,8 +20,6 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
 
         initMenuBar();
-
-        JPanel panel = new RootPanel(new File("C:\\Users\\admin\\AppData\\Roaming\\.minecraft"));
         setContentPane(panel);
     }
 

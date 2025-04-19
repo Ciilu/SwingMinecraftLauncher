@@ -25,20 +25,6 @@ public class RootPanel extends JPanel {
 
         add(scrollPane, BorderLayout.WEST);
         add(gamePane, BorderLayout.CENTER);
-
-        listBox.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        listBox.setCellRenderer(new VersionListCellRenderer());
-
-        listBox.addListSelectionListener(e -> {
-            if (!e.getValueIsAdjusting()) {
-                Version selectedVersion = listBox.getSelectedValue();
-                if (selectedVersion != null) {
-                    gamePane.update(selectedVersion);
-                } else {
-                    gamePane.showEmptyMessage();
-                }
-            }
-        });
     }
 
     private void loadVersions() {
@@ -55,6 +41,20 @@ public class RootPanel extends JPanel {
         versions.forEach(version -> versionList.append("- ").append(version.getId()).append("\n"));
         SmclLogger.LOGGER.info(String.format("找到 %d 个版本 列表：%s", versions.size(), versionList));
         versions.forEach(listModel::addElement);
+
+        listBox.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listBox.setCellRenderer(new VersionListCellRenderer());
+
+        listBox.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                Version selectedVersion = listBox.getSelectedValue();
+                if (selectedVersion != null) {
+                    gamePane.update(selectedVersion);
+                } else {
+                    gamePane.showEmptyMessage();
+                }
+            }
+        });
     }
 
     private static class VersionListCellRenderer extends DefaultListCellRenderer {
